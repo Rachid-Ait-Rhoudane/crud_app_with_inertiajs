@@ -36,7 +36,7 @@ let submit = () => {
                 </div>
 
                 <div class="bg-gray-200 rounded-b-md py-6 flex flex-row-reverse pr-6">
-                    <button type="submit">Login</button>
+                    <button class="px-3 py-2 bg-secondary hover:bg-orange-500 text-white font-bold rounded-md" type="submit">Login</button>
                 </div>
 
             </form>
