@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\OrganisationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,13 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [LoginController::class, "create"])->middleware("guest");
+
+Route::middleware('guest')->group(function () {
+
+    //organisations routes
+    Route::get('/organisations', [OrganisationController::class, 'index']);
+
+
+    //contacts routes
+    Route::get('/contacts', [ContactController::class, 'index']);
+});

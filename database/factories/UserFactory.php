@@ -39,4 +39,18 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    /**
+     * Indicate that the model's remember token should be null.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function dontRemember()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'remember_token' => null,
+            ];
+        });
+    }
 }
