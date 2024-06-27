@@ -1,12 +1,36 @@
 <script setup>
 
 import { Link } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
 
 defineProps({
     organisations: {
         type: Object,
         required: true
     }
+});
+
+onMounted(() => {
+
+    let menuList = document.getElementById("filter-list");
+    let btnArrow = document.querySelector("#filter-btn i");
+
+    document.addEventListener('click', (e) => {
+
+        if(e.target.id == "filter-btn" || e.target.parentNode.id == "filter-btn") {
+
+            menuList.classList.toggle('hidden');
+            btnArrow.classList.toggle('-rotate-90');
+            return;
+        }
+
+        if(! menuList.classList.contains('hidden')) {
+            menuList.classList.add('hidden');
+            btnArrow.classList.remove('-rotate-90');
+            return;
+        }
+    });
+
 });
 
 
@@ -16,9 +40,35 @@ defineProps({
 
     <h1 class="mt-16 text-xl md:text-3xl font-bold">Organisations</h1>
 
+    <div class="my-8 flex items-center justify-between">
+
+        <div class="flex-1 flex items-center">
+            <div class="relative">
+                <button id="filter-btn" class="px-3 h-10 bg-white w-full rounded-l-md border border-gray-200 border-r-0 flex items-center gap-2 text-gray-500">
+                    <span class="capitalize hidden lg:block">with trashed</span>
+                    <i class="fa-solid fa-chevron-down duration-300 text-xs md:text-sm"></i>
+                </button>
+                <div id="filter-list" class="hidden absolute left-0 top-[calc(100%+5px)] w-fit lg:w-full bg-white py-2 divide-y divide-gray-200 rounded-md">
+                    <Link class="block whitespace-nowrap capitalize p-3 hover:bg-gray-200" href="#">with trashed</Link>
+                    <Link class="block whitespace-nowrap capitalize p-3 hover:bg-gray-200" href="#">only trashed</Link>
+                </div>
+            </div>
+            <div class="flex-1 flex items-center gap-1 md:gap-4">
+                <input class="h-10 w-3/4 lg:w-1/4 rounded-r-md focus:outline-none border border-gray-200 pl-4 pr-2" type="text" placeholder="Search for ...">
+                <button class="capitalize text-gray-500 hover:text-gray-700">reset</button>
+            </div>
+        </div>
+
+        <Link class="px-3 py-2 rounded-md bg-secondary text-white hover:bg-orange-500 flex items-center gap-2" href="#">
+            <span class="capitalize hidden lg:block">create organisation</span>
+            <i class="fa-solid fa-plus text-xs md:text-sm"></i>
+        </Link>
+
+    </div>
+
     <div class="overflow-x-auto mt-6">
 
-        <table class="min-w-[800px] w-full bg-white shadow-md border-collapse">
+        <table class="min-w-[800px] w-full bg-white shadow-md">
 
             <thead class="border-b border-b-gray-200 text-base md:text-2xl capitalize text-white bg-main">
                 <tr>
