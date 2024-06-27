@@ -17,9 +17,12 @@ class OrganisationFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'city' => $this->faker->city,
-            'phone' => $this->faker->phoneNumber,
+            'name' => $this->faker->company(),
+            'city' => $this->faker->city(),
+            'address' => $this->faker->address(),
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->companyEmail(),
+            'country' => collect(['spain', 'france', 'united states', 'united kingdom', 'mexico'])->random()
         ];
     }
 }

@@ -26,6 +26,8 @@ class OrganisationController extends Controller
                                     'id' => $organisation->id,
                                     'name' => $organisation->name,
                                     'city' => $organisation->city,
+                                    'address' => $organisation->address,
+                                    'email' => $organisation->email,
                                     'phone' => $organisation->phone
                                 ];
                             })
@@ -41,7 +43,7 @@ class OrganisationController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Organisation/Create');
     }
 
     /**
@@ -52,7 +54,19 @@ class OrganisationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'name' => ['required', 'min:3'],
+            'city' => ['required', 'min:3'],
+            'address' => ['required', 'min:3'],
+            'phone' => ['required', 'min:3'],
+            'email' => ['required', 'email']
+        ]);
+
+        Organisation::create($attributes);
+
+        // return Inertia::render('Organisation/index', [
+        //     'success' => 'Organisation created successfully'
+        // ]);
     }
 
     /**

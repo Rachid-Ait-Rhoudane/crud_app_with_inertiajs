@@ -101,7 +101,7 @@ watch(search, value => {
 
         </div>
 
-        <Link class="px-3 py-2 rounded-md bg-secondary text-white hover:bg-orange-500 flex items-center gap-2" href="#">
+        <Link class="px-3 py-2 rounded-md bg-secondary text-white hover:bg-orange-500 flex items-center gap-2" href="/organisation/create">
             <span class="capitalize hidden lg:block">create</span>
             <i class="fa-solid fa-plus text-xs md:text-sm"></i>
         </Link>
@@ -116,6 +116,8 @@ watch(search, value => {
                 <tr>
                     <th class="text-left px-4 py-3">name</th>
                     <th class="text-left px-4">city</th>
+                    <th class="text-left px-4">address</th>
+                    <th class="text-left px-4">email</th>
                     <th class="text-left px-4">phone</th>
                     <th class="text-left px-4"></th>
                 </tr>
@@ -125,6 +127,8 @@ watch(search, value => {
                 <tr class="border-b border-b-gray-200 even:bg-gray-200 whitespace-nowrap text-sm md:text-base" v-for="organisation in organisations.data" :key="organisation.id">
                     <td class="text-left px-4 py-3">{{ organisation.name }}</td>
                     <td class="text-left px-4">{{ organisation.city }}</td>
+                    <td class="text-left px-4">{{ organisation.address }}</td>
+                    <td class="text-left px-4">{{ organisation.email }}</td>
                     <td class="text-left px-4">{{ organisation.phone }}</td>
                     <td class="text-left px-4 w-fit">
                         <Link class="flex items-center gap-1 text-blue-500 hover:text-blue-600" href="#">

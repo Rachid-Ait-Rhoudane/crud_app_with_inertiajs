@@ -9,6 +9,20 @@ class Organisation extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'city',
+        'address',
+        'country',
+        'phone'
+    ];
+
     public function contacts() {
 
         return $this->hasMany(Contact::class);
