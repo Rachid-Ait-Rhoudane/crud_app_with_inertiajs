@@ -15,25 +15,25 @@ import NavLink from './NavLink.vue';
 
         <ul class="w-full row-span-11 mt-10">
             <li>
-                <NavLink href="/">
+                <NavLink href="/" :active="$page.component == 'Home'">
                     <i class="fa-solid fa-gauge text-white"></i>
                     <span>Dashbord</span>
                 </NavLink>
             </li>
             <li>
-                <NavLink href="/organisations">
+                <NavLink href="/organisations" :active="$page.component == 'Organisation/Index'">
                     <i class="fa-solid fa-sitemap text-white"></i>
                     <span>Organisations</span>
                 </NavLink>
             </li>
             <li>
-                <NavLink href="/contacts">
+                <NavLink href="/contacts" :active="$page.component == 'Contact/Index'">
                     <i class="fa-solid fa-address-book text-white"></i>
                     <span>Contacts</span>
                 </NavLink>
             </li>
             <li>
-                <NavLink href="/contacts">
+                <NavLink href="/contacts" :active="false">
                     <i class="fa-solid fa-print text-white"></i>
                     <span>Reports</span>
                 </NavLink>

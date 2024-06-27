@@ -9,7 +9,7 @@ import Menu from './Menu.vue';
 
 <template>
 
-    <div class="flex h-screen">
+    <div class="flex min-h-screen">
 
         <Navbar />
 
@@ -26,7 +26,7 @@ import Menu from './Menu.vue';
                 </div>
             </div>
 
-            <div class="row-span-10 md:row-span-11 bg-gray-100 px-4">
+            <div class="row-span-10 md:row-span-11 bg-gray-100 px-4 md:px-8 overflow-hidden">
                 <slot />
             </div>
 
