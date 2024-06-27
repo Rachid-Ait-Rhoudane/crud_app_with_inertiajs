@@ -1,12 +1,16 @@
 <script setup>
 
+import { router } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
-defineProps({
+let props = defineProps({
     organisations: {
         type: Object,
         required: true
+    },
+    filters: {
+        type: Object
     }
 });
 
@@ -33,6 +37,38 @@ onMounted(() => {
 
 });
 
+let filter = ref('filter');
+
+const withTrashed = () => {
+
+    filter.value = "with trashed";
+}
+
+const onlyTrashed = () => {
+
+    filter.value = "only trashed";
+}
+
+const reset = () => {
+
+    filter.value = "filter";
+    search.value = '';
+}
+
+let search = ref(props.filters['search']);
+
+watch(search, value => {
+
+    router.get('/organisations',
+    {
+        search: search.value
+    },
+    {
+        preserveState: true,
+        replace: true
+    });
+
+});
 
 </script>
 
@@ -43,24 +79,30 @@ onMounted(() => {
     <div class="my-8 flex items-center justify-between">
 
         <div class="flex-1 flex items-center">
+
             <div class="relative">
+
                 <button id="filter-btn" class="px-3 h-10 bg-white w-full rounded-l-md border border-gray-200 border-r-0 flex items-center gap-2 text-gray-500">
-                    <span class="capitalize hidden lg:block">with trashed</span>
+                    <span class="capitalize hidden lg:block">{{ filter }}</span>
                     <i class="fa-solid fa-chevron-down duration-300 text-xs md:text-sm"></i>
                 </button>
-                <div id="filter-list" class="hidden absolute left-0 top-[calc(100%+5px)] w-fit lg:w-full bg-white py-2 divide-y divide-gray-200 rounded-md">
-                    <Link class="block whitespace-nowrap capitalize p-3 hover:bg-gray-200" href="#">with trashed</Link>
-                    <Link class="block whitespace-nowrap capitalize p-3 hover:bg-gray-200" href="#">only trashed</Link>
+
+                <div id="filter-list" class="hidden absolute left-0 top-[calc(100%+5px)] min-w-[140px] bg-white py-2 divide-y divide-gray-200 rounded-md">
+                    <button type="button" @click="withTrashed" class="block whitespace-nowrap capitalize p-3 hover:bg-gray-200 w-full">with trashed</button>
+                    <button type="button" @click="onlyTrashed" class="block whitespace-nowrap capitalize p-3 hover:bg-gray-200 w-full">only trashed</button>
                 </div>
+
             </div>
+
             <div class="flex-1 flex items-center gap-1 md:gap-4">
-                <input class="h-10 w-3/4 lg:w-1/4 rounded-r-md focus:outline-none border border-gray-200 pl-4 pr-2" type="text" placeholder="Search for ...">
-                <button class="capitalize text-gray-500 hover:text-gray-700">reset</button>
+                <input v-model="search" class="h-10 w-3/4 lg:w-1/4 rounded-r-md focus:outline-none border border-gray-200 pl-4 pr-2" type="text" placeholder="Search for ...">
+                <button type="button" @click="reset" class="capitalize text-gray-500 hover:text-gray-700">reset</button>
             </div>
+
         </div>
 
         <Link class="px-3 py-2 rounded-md bg-secondary text-white hover:bg-orange-500 flex items-center gap-2" href="#">
-            <span class="capitalize hidden lg:block">create organisation</span>
+            <span class="capitalize hidden lg:block">create</span>
             <i class="fa-solid fa-plus text-xs md:text-sm"></i>
         </Link>
 

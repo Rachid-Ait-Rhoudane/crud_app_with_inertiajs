@@ -13,10 +13,24 @@ class OrganisationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('Organisation/Index', [
-            'organisations' => Organisation::paginate(10)->withQueryString()
+            'organisations' => Organisation::query()
+                            ->when($request->input('search'), function ($query, $search) {
+                                $query->where('name', 'LIKE', '%' . $search . '%');
+                            })
+                            ->paginate(10)
+                            ->through(function($organisation) {
+                                return [
+                                    'id' => $organisation->id,
+                                    'name' => $organisation->name,
+                                    'city' => $organisation->city,
+                                    'phone' => $organisation->phone
+                                ];
+                            })
+                            ->withQueryString(),
+            'filters' => $request->only(['search'])
         ]);
     }
 
