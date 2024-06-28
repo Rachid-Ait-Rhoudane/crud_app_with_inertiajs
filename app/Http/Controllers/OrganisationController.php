@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Organisation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrganisationController extends Controller
 {
@@ -64,9 +65,7 @@ class OrganisationController extends Controller
 
         Organisation::create($attributes);
 
-        // return Inertia::render('Organisation/index', [
-        //     'success' => 'Organisation created successfully'
-        // ]);
+        return redirect('/organisations');
     }
 
     /**
