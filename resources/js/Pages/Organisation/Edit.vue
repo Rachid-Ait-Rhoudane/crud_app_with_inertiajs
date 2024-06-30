@@ -2,6 +2,10 @@
 
 import { Link } from '@inertiajs/vue3';
 import { useForm } from '@inertiajs/vue3';
+import FormInput from '../../Shared/FormInput.vue';
+import FormSelect from '../../Shared/FormSelect.vue';
+import FormSelectOption from '../../Shared/FormSelectOption.vue';
+import FormValidationError from '../../Shared/FormValidationError.vue';
 
 let props = defineProps({
     organisation: {
@@ -31,45 +35,38 @@ const formInputs = useForm({
     <form @submit.prevent="formInputs.put('/organisations/' + organisation.id)" class="my-16 p-8 bg-white grid grid-cols-1 lg:grid-cols-2 gap-6 rounded-md shadow-lg">
 
         <div class="space-y-2">
-            <label class="block w-fit font-bold capitalize text-gray-700" for="name">name:</label>
-            <input v-model="formInputs.name" class="w-full h-10 border border-gray-200 rounded-md focus:outline-none px-3" type="text" placeholder="Organisation name" id="name">
-            <span v-if="formInputs.errors.name" class="block text-xs text-red-500">{{ formInputs.errors.name }}</span>
+            <FormInput @update-value="(val) => formInputs.name = val" label="name" placeHolder="Organisation name" input-type="text" :input-value="organisation.name">{{ formInputs.errors.name }}</FormInput>
+            <FormValidationError v-if="formInputs.errors.name">{{ formInputs.errors.name }}</FormValidationError>
         </div>
 
         <div class="space-y-2">
-            <label class="block w-fit font-bold capitalize text-gray-700" for="email">email:</label>
-            <input v-model="formInputs.email" class="w-full h-10 border border-gray-200 rounded-md focus:outline-none px-3" type="text" placeholder="Organisation email" id="email">
-            <span v-if="formInputs.errors.email" class="block text-xs text-red-500">{{ formInputs.errors.email }}</span>
+            <FormInput @update-value="(val) => formInputs.email = val" label="email" placeHolder="Organisation email" input-type="email" :input-value="organisation.email">{{ formInputs.errors.email }}</FormInput>
+            <FormValidationError v-if="formInputs.errors.email">{{ formInputs.errors.email }}</FormValidationError>
         </div>
 
         <div class="space-y-2">
-            <label class="block w-fit font-bold capitalize text-gray-700" for="address">address:</label>
-            <input v-model="formInputs.address" class="w-full h-10 border border-gray-200 rounded-md focus:outline-none px-3" type="text" placeholder="Organisation address" id="address">
-            <span v-if="formInputs.errors.address" class="block text-xs text-red-500">{{ formInputs.errors.address }}</span>
+            <FormInput @update-value="(val) => formInputs.address = val" label="address" placeHolder="Organisation address" input-type="text" :input-value="organisation.address">{{ formInputs.errors.address }}</FormInput>
+            <FormValidationError v-if="formInputs.errors.address">{{ formInputs.errors.address }}</FormValidationError>
         </div>
 
         <div class="space-y-2">
-            <label class="block w-fit font-bold capitalize text-gray-700" for="city">city:</label>
-            <input v-model="formInputs.city" class="w-full h-10 border border-gray-200 rounded-md focus:outline-none px-3" type="text" placeholder="Organisation city" id="city">
-            <span v-if="formInputs.errors.city" class="block text-xs text-red-500">{{ formInputs.errors.city }}</span>
+            <FormInput @update-value="(val) => formInputs.city = val" label="city" placeHolder="Organisation city" input-type="text" :input-value="organisation.city">{{ formInputs.errors.city }}</FormInput>
+            <FormValidationError v-if="formInputs.errors.city">{{ formInputs.errors.city }}</FormValidationError>
         </div>
 
         <div class="space-y-2">
-            <label class="block w-fit font-bold capitalize text-gray-700" for="phone">phone:</label>
-            <input v-model="formInputs.phone" class="w-full h-10 border border-gray-200 rounded-md focus:outline-none px-3" type="text" placeholder="Organisation phone" id="phone">
-            <span v-if="formInputs.errors.phone" class="block text-xs text-red-500">{{ formInputs.errors.phone }}</span>
+            <FormInput @update-value="(val) => formInputs.phone = val" label="phone" placeHolder="Organisation phone" input-type="text" :input-value="organisation.phone">{{ formInputs.errors.phone }}</FormInput>
+            <FormValidationError v-if="formInputs.errors.phone">{{ formInputs.errors.phone }}</FormValidationError>
         </div>
 
         <div class="space-y-2">
-            <label class="block w-fit font-bold capitalize text-gray-700" for="country">country:</label>
-            <select v-model="formInputs.country" class="w-full h-10 border border-gray-200 rounded-md focus:outline-none px-3 capitalize cursor-pointer" id="country">
-                <option class="capitalize" value="united states">united states</option>
-                <option class="capitalize" value="mexico">mexico</option>
-                <option class="capitalize" value="spain">spain</option>
-                <option class="capitalize" value="france">france</option>
-                <option class="capitalize" value="united kingdom">united kingdom</option>
-            </select>
-            <span v-if="formInputs.errors.country" class="block text-xs text-red-500">{{ formInputs.errors.country }}</span>
+            <FormSelect @update-value="(val) => formInputs.phone = val" label="country" :select-value="organisation.country">
+                <FormSelectOption value="united states">united states</FormSelectOption>
+                <FormSelectOption value="mexico">mexico</FormSelectOption>
+                <FormSelectOption value="spain">spain</FormSelectOption>
+                <FormSelectOption value="france">france</FormSelectOption>
+                <FormSelectOption value="united kingdom">united kingdom</FormSelectOption>
+            </FormSelect>
         </div>
 
         <div class="col-span-1 lg:col-span-2 flex justify-end">

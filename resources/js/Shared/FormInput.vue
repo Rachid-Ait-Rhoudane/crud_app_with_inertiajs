@@ -15,6 +15,10 @@ defineProps({
         type: String,
         required: true,
         default: ''
+    },
+    inputValue: {
+        type: String,
+        default: ''
     }
 });
 
@@ -30,6 +34,13 @@ let updateValue = (e) => {
 <template>
 
     <label class="block w-fit font-bold capitalize text-gray-700" :for="label">{{ label }}:</label>
-    <input @change="updateValue" class="w-full h-10 border border-gray-200 rounded-md focus:outline-none px-3" :type="inputType" :placeholder="placeHolder" :id="label">
+    <input
+        @change="updateValue"
+        class="w-full h-10 border border-gray-200 rounded-md focus:outline-none px-3"
+        :type="inputType"
+        :value="inputValue"
+        :placeholder="placeHolder"
+        :id="label"
+    >
 
 </template>
