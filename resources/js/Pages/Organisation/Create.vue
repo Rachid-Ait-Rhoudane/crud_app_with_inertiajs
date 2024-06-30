@@ -3,8 +3,6 @@
 import { Link } from '@inertiajs/vue3';
 import { useForm } from '@inertiajs/vue3';
 
-// defineProps({ errors: Object });
-
 const formInputs = useForm({
     name: '',
     email: '',
@@ -19,9 +17,11 @@ const formInputs = useForm({
 
 <template>
 
-    <h1 class="text-3xl font-bold mt-16 text-gray-600"> <Link class="text-secondary hover:text-main" href="/organisations">Organisation/</Link> Create</h1>
+    <h1 class="text-3xl font-bold mt-16 text-gray-600">
+        <Link class="text-secondary hover:text-main" href="/organisations">Organisation/</Link> Create
+    </h1>
 
-    <form @submit.prevent="formInputs.post('/organisations')" class="mt-16 p-8 bg-white grid grid-cols-2 gap-6 rounded-md shadow-lg">
+    <form @submit.prevent="formInputs.post('/organisations')" class="my-16 p-8 bg-white grid grid-cols-1 lg:grid-cols-2 gap-6 rounded-md shadow-lg">
 
         <div class="space-y-2">
             <label class="block w-fit font-bold capitalize text-gray-700" for="name">name:</label>
@@ -65,7 +65,7 @@ const formInputs = useForm({
             <span v-if="formInputs.errors.country" class="block text-xs text-red-500">{{ formInputs.errors.country }}</span>
         </div>
 
-        <div class="col-span-2 flex justify-end">
+        <div class="col-span-1 lg:col-span-2 flex justify-end">
             <button class="px-3 py-2 bg-secondary hover:bg-orange-500 text-white font-bold capitalize rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed" type="submit" :disabled="formInputs.processing">submit</button>
         </div>
 

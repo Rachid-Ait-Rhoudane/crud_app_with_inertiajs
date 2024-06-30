@@ -60,12 +60,13 @@ class OrganisationController extends Controller
             'city' => ['required', 'min:3'],
             'address' => ['required', 'min:3'],
             'phone' => ['required', 'min:3'],
-            'email' => ['required', 'email']
+            'email' => ['required', 'email'],
+            'country' => ['required']
         ]);
 
         Organisation::create($attributes);
 
-        return redirect('/organisations');
+        return redirect('/organisations')->with('success', 'Organisation created successfully');
     }
 
     /**

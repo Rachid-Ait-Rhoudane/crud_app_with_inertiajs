@@ -11,6 +11,9 @@ let props = defineProps({
     },
     filters: {
         type: Object
+    },
+    success: {
+        type: String
     }
 });
 
