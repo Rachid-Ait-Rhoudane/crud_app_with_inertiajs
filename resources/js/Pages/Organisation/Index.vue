@@ -4,6 +4,10 @@ import { router } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import { onMounted, ref, watch } from 'vue';
 import Paginator from '../../Shared/Paginator.vue';
+import CustomTable from '../../Shared/CustomTable.vue';
+import CustomTableBody from '../../Shared/CustomTableBody.vue';
+import CustomTableBodyColumn from '../../Shared/CustomTableBodyColumn.vue';
+import CustomTableHeadColumn from '../../Shared/CustomTableHeadColumn.vue';
 
 let props = defineProps({
     organisations: {
@@ -112,40 +116,32 @@ watch(search, value => {
 
     </div>
 
-    <div class="overflow-x-auto mt-6">
+    <CustomTable>
 
-        <table class="min-w-[800px] w-full bg-white shadow-md">
+        <template v-slot:head>
+            <CustomTableHeadColumn class="py-3">name</CustomTableHeadColumn>
+            <CustomTableHeadColumn>city</CustomTableHeadColumn>
+            <CustomTableHeadColumn>address</CustomTableHeadColumn>
+            <CustomTableHeadColumn>email</CustomTableHeadColumn>
+            <CustomTableHeadColumn>phone</CustomTableHeadColumn>
+            <CustomTableHeadColumn></CustomTableHeadColumn>
+        </template>
 
-            <thead class="border-b border-b-gray-200 text-base md:text-2xl capitalize text-white bg-main">
-                <tr>
-                    <th class="text-left px-4 py-3">name</th>
-                    <th class="text-left px-4">city</th>
-                    <th class="text-left px-4">address</th>
-                    <th class="text-left px-4">email</th>
-                    <th class="text-left px-4">phone</th>
-                    <th class="text-left px-4"></th>
-                </tr>
-            </thead>
+        <CustomTableBody v-for="organisation in organisations.data" :key="organisation.id">
+            <CustomTableBodyColumn>{{ organisation.name }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn>{{ organisation.city }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn>{{ organisation.address }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn>{{ organisation.email }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn>{{ organisation.phone }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn>
+                <Link class="flex items-center gap-1 text-blue-500 hover:text-blue-600" :href="'/organisations/' + organisation.id">
+                    <i class="fa-solid fa-eye"></i>
+                    <span>View</span>
+                </Link>
+            </CustomTableBodyColumn>
+        </CustomTableBody>
 
-            <tbody>
-                <tr class="border-b border-b-gray-200 even:bg-gray-200 whitespace-nowrap text-sm md:text-base" v-for="organisation in organisations.data" :key="organisation.id">
-                    <td class="text-left px-4 py-3">{{ organisation.name }}</td>
-                    <td class="text-left px-4">{{ organisation.city }}</td>
-                    <td class="text-left px-4">{{ organisation.address }}</td>
-                    <td class="text-left px-4">{{ organisation.email }}</td>
-                    <td class="text-left px-4">{{ organisation.phone }}</td>
-                    <td class="text-left px-4 w-fit">
-                        <Link class="flex items-center gap-1 text-blue-500 hover:text-blue-600" :href="'/organisations/' + organisation.id">
-                            <i class="fa-solid fa-eye"></i>
-                            <span>View</span>
-                        </Link>
-                    </td>
-                </tr>
-            </tbody>
-
-        </table>
-
-    </div>
+    </CustomTable>
 
     <div class="my-6 flex items-center gap-2">
 
