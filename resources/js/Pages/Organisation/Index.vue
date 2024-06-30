@@ -3,6 +3,7 @@
 import { router } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import { onMounted, ref, watch } from 'vue';
+import Paginator from '../../Shared/Paginator.vue';
 
 let props = defineProps({
     organisations: {
@@ -148,16 +149,7 @@ watch(search, value => {
 
     <div class="my-6 flex items-center gap-2">
 
-        <Component
-            :is="link.url ? Link : 'span'"
-            class="px-2 md:px-3 py-1 md:py-2 border border-gray-300 rounded-md text-xs"
-            v-for="link in organisations.links"
-            :key="link.id"
-            v-html="link.label"
-            :class="{'bg-secondary text-white font-bold': link.active, 'text-gray-400 border-gray-200 cursor-not-allowed': !link.url, 'hover:bg-gray-200': link.url && !link.active}"
-            :href="link.url"
-            preserve-scroll
-        />
+        <Paginator :links="organisations.links"></Paginator>
 
     </div>
 
