@@ -1,8 +1,10 @@
 <script setup>
 
+import { router } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
+import swal from 'sweetalert';
 
-defineProps({
+let props = defineProps({
     organisation: {
         type: Object,
         required: true
@@ -12,6 +14,22 @@ defineProps({
         required: true
     }
 });
+
+const showAlert = () => {
+
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this organisation!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                router.delete('/organisations/' + props.organisation.id);
+            }
+    });
+};
 
 </script>
 
@@ -54,7 +72,7 @@ defineProps({
         </div>
 
         <div class="flex items-center justify-between mt-8">
-            <Link class="px-3 py-2 bg-red-500 hover:bg-red-600 text-white capitalize rounded-md" as="button" method="delete" :href="'/organisations/' + organisation.id">delete</Link>
+            <button type="button" @click="showAlert" class="px-3 py-2 bg-red-500 hover:bg-red-600 text-white capitalize rounded-md">delete</button>
             <Link class="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white capitalize rounded-md" :href="'/organisations/edit/' + organisation.id">edit</Link>
         </div>
 

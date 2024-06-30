@@ -127,6 +127,8 @@ class OrganisationController extends Controller
      */
     public function destroy(Organisation $organisation)
     {
-        //
+        Organisation::destroy($organisation->id);
+
+        return redirect('/organisations');
     }
 }

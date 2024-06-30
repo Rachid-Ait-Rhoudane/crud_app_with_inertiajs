@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('city');
             $table->string('phone');
-            $table->unsignedBigInteger('organisation_id');
-            $table->foreign('organisation_id')->references('id')->on('organisations');
+            $table->foreignId('organisation_id')
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

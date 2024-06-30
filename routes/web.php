@@ -31,6 +31,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/organisations/{organisation}', [OrganisationController::class, 'show']);
     Route::get('/organisations/edit/{organisation}', [OrganisationController::class, 'edit']);
     Route::put('/organisations/{organisation}', [OrganisationController::class, 'update']);
+    Route::delete('/organisations/{organisation}', [OrganisationController::class, 'destroy']);
 
     //contacts routes
     Route::get('/contacts', [ContactController::class, 'index']);
