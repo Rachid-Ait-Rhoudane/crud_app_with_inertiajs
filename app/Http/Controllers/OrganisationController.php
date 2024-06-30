@@ -78,8 +78,7 @@ class OrganisationController extends Controller
     public function show(Organisation $organisation)
     {
         return Inertia::render('Organisation/Show', [
-            'organisation' => $organisation,
-            'contacts' => $organisation->contacts
+            'organisation' => $organisation->load('contacts')
         ]);
     }
 

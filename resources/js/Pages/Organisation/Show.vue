@@ -1,15 +1,17 @@
 <script setup>
 
-import { router } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
 import swal from 'sweetalert';
+import { Link } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
+import ShowInfo from '../../Shared/ShowInfo.vue';
+import CustomTable from '../../Shared/CustomTable.vue';
+import CustomTableBody from '../../Shared/CustomTableBody.vue';
+import CustomTableBodyColumn from '../../Shared/CustomTableBodyColumn.vue';
+import CustomTableHeadColumn from '../../Shared/CustomTableHeadColumn.vue';
 
 let props = defineProps({
     organisation: {
-        type: Object,
-        required: true
-    },
-    contacts: {
         type: Object,
         required: true
     }
@@ -29,6 +31,7 @@ const showAlert = () => {
                 router.delete('/organisations/' + props.organisation.id);
             }
     });
+
 };
 
 </script>
@@ -41,35 +44,29 @@ const showAlert = () => {
 
     <div class="my-16 p-8 bg-white rounded-md shadow-lg flex flex-col gap-4">
 
-        <div class="flex gap-4 capitalize">
-            <span class="font-bold text-main">name:</span>
-            <span class="font-bold text-gray-500">{{ organisation.name }}</span>
-        </div>
+        <ShowInfo info="name">
+            {{ organisation.name }}
+        </ShowInfo>
 
-        <div class="flex gap-4 capitalize">
-            <span class="font-bold text-main capitalize">email:</span>
-            <span class="font-bold text-gray-500">{{ organisation.email }}</span>
-        </div>
+        <ShowInfo info="email">
+            {{ organisation.email }}
+        </ShowInfo>
 
-        <div class="flex gap-4 capitalize">
-            <span class="font-bold text-main capitalize">address:</span>
-            <span class="font-bold text-gray-500">{{ organisation.address }}</span>
-        </div>
+        <ShowInfo info="address">
+            {{ organisation.address }}
+        </ShowInfo>
 
-        <div class="flex gap-4 capitalize">
-            <span class="font-bold text-main capitalize">city:</span>
-            <span class="font-bold text-gray-500">{{ organisation.city }}</span>
-        </div>
+        <ShowInfo info="city">
+            {{ organisation.city }}
+        </ShowInfo>
 
-        <div class="flex gap-4 capitalize">
-            <span class="font-bold text-main capitalize">phone:</span>
-            <span class="font-bold text-gray-500">{{ organisation.phone }}</span>
-        </div>
+        <ShowInfo info="phone">
+            {{ organisation.phone }}
+        </ShowInfo>
 
-        <div class="flex gap-4 capitalize">
-            <span class="font-bold text-main capitalize">country:</span>
-            <span class="font-bold text-gray-500">{{ organisation.country }}</span>
-        </div>
+        <ShowInfo info="country">
+            {{ organisation.country }}
+        </ShowInfo>
 
         <div class="flex items-center justify-between mt-8">
             <button type="button" @click="showAlert" class="px-3 py-2 bg-red-500 hover:bg-red-600 text-white capitalize rounded-md">delete</button>
@@ -80,28 +77,20 @@ const showAlert = () => {
 
     <h1 class="mb-4 text-3xl font-bold text-gray-500">Contacts</h1>
 
-    <div class="overflow-x-auto mb-16">
+    <CustomTable class="mb-16">
 
-        <table class="min-w-[650px] w-full bg-white">
+        <template v-slot:head>
+            <CustomTableHeadColumn class="py-3">name</CustomTableHeadColumn>
+            <CustomTableHeadColumn>city</CustomTableHeadColumn>
+            <CustomTableHeadColumn>phone</CustomTableHeadColumn>
+        </template>
 
-            <thead class="border-b border-b-gray-200 text-base md:text-2xl capitalize text-white bg-main">
-                <tr>
-                    <th class="text-left px-4 py-3">name</th>
-                    <th class="text-left px-4 py-3">city</th>
-                    <th class="text-left px-4 py-3">phone</th>
-                </tr>
-            </thead>
+        <CustomTableBody v-for="contact in organisation.contacts" :key="contact.id">
+            <CustomTableBodyColumn>{{ contact.name }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn>{{ contact.city }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn>{{ contact.phone }}</CustomTableBodyColumn>
+        </CustomTableBody>
 
-            <tbody>
-                <tr class="border-b border-b-gray-200 even:bg-gray-200 whitespace-nowrap text-sm md:text-base" v-for="contact in contacts" :key="contact.id">
-                    <td class="text-left px-4 py-3">{{ contact.name }}</td>
-                    <td class="text-left px-4">{{ contact.city }}</td>
-                    <td class="text-left px-4">{{ contact.phone }}</td>
-                </tr>
-            </tbody>
-
-        </table>
-
-    </div>
+    </CustomTable>
 
 </template>
