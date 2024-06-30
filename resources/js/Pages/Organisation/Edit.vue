@@ -28,7 +28,7 @@ const formInputs = useForm({
         <Link class="text-secondary hover:text-main" href="/organisations">Organisations/</Link> {{ organisation.name }}
     </h1>
 
-    <form @submit.prevent="formInputs.post('/organisations')" class="my-16 p-8 bg-white grid grid-cols-1 lg:grid-cols-2 gap-6 rounded-md shadow-lg">
+    <form @submit.prevent="formInputs.put('/organisations/' + organisation.id)" class="my-16 p-8 bg-white grid grid-cols-1 lg:grid-cols-2 gap-6 rounded-md shadow-lg">
 
         <div class="space-y-2">
             <label class="block w-fit font-bold capitalize text-gray-700" for="name">name:</label>

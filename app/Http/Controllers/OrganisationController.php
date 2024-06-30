@@ -66,7 +66,7 @@ class OrganisationController extends Controller
 
         Organisation::create($attributes);
 
-        return redirect('/organisations')->with('success', 'Organisation created successfully');
+        return redirect('/organisations');
     }
 
     /**
@@ -105,7 +105,18 @@ class OrganisationController extends Controller
      */
     public function update(Request $request, Organisation $organisation)
     {
-        //
+        $attributes = $request->validate([
+            'name' => ['required', 'min:3'],
+            'city' => ['required', 'min:3'],
+            'address' => ['required', 'min:3'],
+            'phone' => ['required', 'min:3'],
+            'email' => ['required', 'email'],
+            'country' => ['required']
+        ]);
+
+        $organisation->update($attributes);
+
+        return redirect('/organisations/'.$organisation->id);
     }
 
     /**

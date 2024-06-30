@@ -30,6 +30,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/organisations', [OrganisationController::class, 'store']);
     Route::get('/organisations/{organisation}', [OrganisationController::class, 'show']);
     Route::get('/organisations/edit/{organisation}', [OrganisationController::class, 'edit']);
+    Route::put('/organisations/{organisation}', [OrganisationController::class, 'update']);
 
     //contacts routes
     Route::get('/contacts', [ContactController::class, 'index']);
