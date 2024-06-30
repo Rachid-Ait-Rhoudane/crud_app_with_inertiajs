@@ -18,7 +18,7 @@ const formInputs = useForm({
 <template>
 
     <h1 class="text-3xl font-bold mt-16 text-gray-600">
-        <Link class="text-secondary hover:text-main" href="/organisations">Organisation/</Link> Create
+        <Link class="text-secondary hover:text-main" href="/organisations">Organisations/</Link> Create
     </h1>
 
     <form @submit.prevent="formInputs.post('/organisations')" class="my-16 p-8 bg-white grid grid-cols-1 lg:grid-cols-2 gap-6 rounded-md shadow-lg">

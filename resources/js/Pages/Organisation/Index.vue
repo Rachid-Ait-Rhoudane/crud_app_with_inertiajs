@@ -134,7 +134,7 @@ watch(search, value => {
                     <td class="text-left px-4">{{ organisation.email }}</td>
                     <td class="text-left px-4">{{ organisation.phone }}</td>
                     <td class="text-left px-4 w-fit">
-                        <Link class="flex items-center gap-1 text-blue-500 hover:text-blue-600" href="#">
+                        <Link class="flex items-center gap-1 text-blue-500 hover:text-blue-600" :href="'/organisations/' + organisation.id">
                             <i class="fa-solid fa-eye"></i>
                             <span>View</span>
                         </Link>
