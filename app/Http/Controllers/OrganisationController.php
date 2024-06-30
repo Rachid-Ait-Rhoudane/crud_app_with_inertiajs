@@ -91,7 +91,9 @@ class OrganisationController extends Controller
      */
     public function edit(Organisation $organisation)
     {
-        //
+        return Inertia::render('Organisation/Edit', [
+            'organisation' => $organisation
+        ]);
     }
 
     /**

@@ -29,6 +29,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/organisation/create', [OrganisationController::class, 'create']);
     Route::post('/organisations', [OrganisationController::class, 'store']);
     Route::get('/organisations/{organisation}', [OrganisationController::class, 'show']);
+    Route::get('/organisations/edit/{organisation}', [OrganisationController::class, 'edit']);
 
     //contacts routes
     Route::get('/contacts', [ContactController::class, 'index']);
