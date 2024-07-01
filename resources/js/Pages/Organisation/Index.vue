@@ -5,6 +5,7 @@ import { Link } from '@inertiajs/vue3';
 import { onMounted, ref, watch } from 'vue';
 import Paginator from '../../Shared/Paginator.vue';
 import CustomTable from '../../Shared/CustomTable.vue';
+import SuccessMessage from '../../Shared/SuccessMessage.vue';
 import CustomTableBody from '../../Shared/CustomTableBody.vue';
 import CustomTableBodyColumn from '../../Shared/CustomTableBodyColumn.vue';
 import CustomTableHeadColumn from '../../Shared/CustomTableHeadColumn.vue';
@@ -17,8 +18,8 @@ let props = defineProps({
     filters: {
         type: Object
     },
-    success: {
-        type: String
+    message: {
+        default: null
     }
 });
 
@@ -82,6 +83,8 @@ watch(search, value => {
 
 <template>
 
+    <SuccessMessage :message="message" />
+
     <h1 class="mt-16 text-xl md:text-3xl font-bold">Organisations</h1>
 
     <div class="my-8 flex items-center justify-between">
@@ -128,7 +131,7 @@ watch(search, value => {
         </template>
 
         <CustomTableBody v-for="organisation in organisations.data" :key="organisation.id">
-            <CustomTableBodyColumn>{{ organisation.name }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn class="py-3">{{ organisation.name }}</CustomTableBodyColumn>
             <CustomTableBodyColumn>{{ organisation.city }}</CustomTableBodyColumn>
             <CustomTableBodyColumn>{{ organisation.address }}</CustomTableBodyColumn>
             <CustomTableBodyColumn>{{ organisation.email }}</CustomTableBodyColumn>

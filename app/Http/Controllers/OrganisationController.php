@@ -33,7 +33,8 @@ class OrganisationController extends Controller
                                 ];
                             })
                             ->withQueryString(),
-            'filters' => $request->only(['search'])
+            'filters' => $request->only(['search']),
+            'message' => $request->session()->get('message')
         ]);
     }
 
@@ -66,7 +67,7 @@ class OrganisationController extends Controller
 
         Organisation::create($attributes);
 
-        return redirect('/organisations');
+        return redirect('/organisations')->with('message', 'organisation created successfully');
     }
 
     /**

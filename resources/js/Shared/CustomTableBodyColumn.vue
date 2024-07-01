@@ -4,7 +4,7 @@
 
 <template>
 
-    <td class="text-left px-4 py-3">
+    <td class="text-left px-4">
         <slot></slot>
     </td>
 
