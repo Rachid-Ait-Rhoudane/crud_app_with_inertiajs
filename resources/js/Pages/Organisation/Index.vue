@@ -46,16 +46,34 @@ onMounted(() => {
 
 });
 
-let filter = ref('filter');
+let filter = ref(props.filters['filter'] ?? 'filter');
 
 const withTrashed = () => {
 
     filter.value = "with trashed";
+    router.get('/organisations',
+    {
+        search: search.value,
+        filter: filter.value
+    },
+    {
+        preserveState: true,
+        replace: true
+    });
 }
 
 const onlyTrashed = () => {
 
     filter.value = "only trashed";
+    router.get('/organisations',
+    {
+        search: search.value,
+        filter: filter.value
+    },
+    {
+        preserveState: true,
+        replace: true
+    });
 }
 
 const reset = () => {
@@ -70,7 +88,8 @@ watch(search, value => {
 
     router.get('/organisations',
     {
-        search: search.value
+        search: search.value,
+        filter: filter.value
     },
     {
         preserveState: true,
@@ -98,9 +117,9 @@ watch(search, value => {
                     <i class="fa-solid fa-chevron-down duration-300 text-xs md:text-sm"></i>
                 </button>
 
-                <div id="filter-list" class="hidden absolute left-0 top-[calc(100%+5px)] min-w-[140px] bg-white py-2 divide-y divide-gray-200 rounded-md">
-                    <button type="button" @click="withTrashed" class="block whitespace-nowrap capitalize p-3 hover:bg-gray-200 w-full">with trashed</button>
-                    <button type="button" @click="onlyTrashed" class="block whitespace-nowrap capitalize p-3 hover:bg-gray-200 w-full">only trashed</button>
+                <div id="filter-list" class="hidden absolute left-0 top-[calc(100%+5px)] min-w-[140px] bg-gray-200 py-2 divide-y divide-gray-100 rounded-md">
+                    <button type="button" @click="withTrashed" class="block whitespace-nowrap capitalize p-3 hover:bg-gray-300 w-full">with trashed</button>
+                    <button type="button" @click="onlyTrashed" class="block whitespace-nowrap capitalize p-3 hover:bg-gray-300 w-full">only trashed</button>
                 </div>
 
             </div>

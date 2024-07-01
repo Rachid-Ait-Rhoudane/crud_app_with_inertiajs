@@ -8,6 +8,7 @@ import CustomTable from '../../Shared/CustomTable.vue';
 import CustomTableBody from '../../Shared/CustomTableBody.vue';
 import CustomTableBodyColumn from '../../Shared/CustomTableBodyColumn.vue';
 import CustomTableHeadColumn from '../../Shared/CustomTableHeadColumn.vue';
+import TrashedMessage from '../../Shared/TrashedMessage.vue';
 
 let props = defineProps({
     organisation: {
@@ -41,7 +42,9 @@ const showAlert = () => {
         <Link class="text-secondary hover:text-main" href="/organisations">Organisations/</Link> {{ organisation.name }}
     </h1>
 
-    <div class="my-16 p-8 bg-white rounded-md shadow-lg flex flex-col gap-4">
+    <TrashedMessage message="organisation Trashed Successfully" />
+
+    <div class="mb-16 p-8 bg-white rounded-md shadow-lg flex flex-col gap-4">
 
         <ShowInfo info="name">
             {{ organisation.name }}
@@ -85,7 +88,7 @@ const showAlert = () => {
         </template>
 
         <CustomTableBody v-for="contact in organisation.contacts" :key="contact.id">
-            <CustomTableBodyColumn>{{ contact.name }}</CustomTableBodyColumn>
+            <CustomTableBodyColumn class="py-3">{{ contact.name }}</CustomTableBodyColumn>
             <CustomTableBodyColumn>{{ contact.city }}</CustomTableBodyColumn>
             <CustomTableBodyColumn>{{ contact.phone }}</CustomTableBodyColumn>
         </CustomTableBody>

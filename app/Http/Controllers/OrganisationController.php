@@ -18,22 +18,31 @@ class OrganisationController extends Controller
     {
         return Inertia::render('Organisation/Index', [
             'organisations' => Organisation::query()
-                            ->when($request->input('search'), function ($query, $search) {
-                                $query->where('name', 'LIKE', '%' . $search . '%');
-                            })
-                            ->paginate(10)
-                            ->through(function($organisation) {
-                                return [
-                                    'id' => $organisation->id,
-                                    'name' => $organisation->name,
-                                    'city' => $organisation->city,
-                                    'address' => $organisation->address,
-                                    'email' => $organisation->email,
-                                    'phone' => $organisation->phone
-                                ];
-                            })
-                            ->withQueryString(),
-            'filters' => $request->only(['search']),
+                                            ->when($request->input('filter'), function ($query, $filter) {
+
+                                                if($filter == 'only trashed') {
+
+                                                    return $query->onlyTrashed();
+                                                }
+
+                                                return $query->withTrashed();
+                                            })
+                                            ->when($request->input('search'), function ($query, $search) {
+                                                $query->where('name', 'LIKE', '%' . $search . '%');
+                                            })
+                                            ->paginate(10)
+                                            ->through(function($organisation) {
+                                                return [
+                                                    'id' => $organisation->id,
+                                                    'name' => $organisation->name,
+                                                    'city' => $organisation->city,
+                                                    'address' => $organisation->address,
+                                                    'email' => $organisation->email,
+                                                    'phone' => $organisation->phone
+                                                ];
+                                            })
+                                            ->withQueryString(),
+            'filters' => $request->only(['search', 'filter']),
             'message' => $request->session()->get('message')
         ]);
     }
@@ -76,8 +85,10 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function show(Organisation $organisation)
+    public function show($id)
     {
+        $organisation = Organisation::withTrashed()->where('id', $id)->first();
+
         return Inertia::render('Organisation/Show', [
             'organisation' => $organisation->load('contacts')
         ]);
@@ -89,8 +100,10 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Organisation $organisation)
+    public function edit($id)
     {
+        $organisation = Organisation::withTrashed()->where('id', $id)->first();
+
         return Inertia::render('Organisation/Edit', [
             'organisation' => $organisation
         ]);
@@ -103,8 +116,9 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Organisation $organisation)
+    public function update(Request $request, $id)
     {
+
         $attributes = $request->validate([
             'name' => ['required', 'min:3'],
             'city' => ['required', 'min:3'],
@@ -113,6 +127,8 @@ class OrganisationController extends Controller
             'email' => ['required', 'email'],
             'country' => ['required']
         ]);
+
+        $organisation = Organisation::withTrashed()->where('id', $id)->first();
 
         $organisation->update($attributes);
 
@@ -125,8 +141,10 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Organisation $organisation)
+    public function destroy($id)
     {
+        $organisation = Organisation::withTrashed()->where('id', $id)->first();
+
         Organisation::destroy($organisation->id);
 
         return redirect('/organisations');
