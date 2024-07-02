@@ -23,9 +23,13 @@ Route::get('/', function () {
 
 Route::get('/login', [LoginController::class, "create"])->middleware("guest");
 
+Route::post('/login', [LoginController::class, "store"])->middleware("guest");
+
 Route::get('/register', [RegisterController::class, "create"])->middleware("guest");
 
-Route::middleware('guest')->group(function () {
+Route::post('/register', [RegisterController::class, "store"])->middleware("guest");
+
+Route::middleware('auth')->group(function () {
 
     //organisations routes
     Route::get('/organisations', [OrganisationController::class, 'index']);
@@ -46,4 +50,7 @@ Route::middleware('guest')->group(function () {
     Route::put('/contacts/{contact}', [ContactController::class, 'update'])->withTrashed();
     Route::delete('/contacts/{contact}', [ContactController::class, 'trash']);
     Route::post('/contacts/restore/{contact}', [ContactController::class, 'restore'])->withTrashed();
+
+    //logout
+    Route::delete('/logout', [LoginController::class, "destroy"]);
 });

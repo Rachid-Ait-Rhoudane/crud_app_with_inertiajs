@@ -49,7 +49,7 @@ onMounted(() => {
             </Link>
         </li>
         <li>
-            <Link href="/logout" class="flex items-center gap-2 p-2 hover:bg-secondary hover:text-white capitalize">
+            <Link href="/logout" method="delete" as="button" class="flex items-center gap-2 p-2 w-full hover:bg-secondary hover:text-white capitalize">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>logout</span>
             </Link>
