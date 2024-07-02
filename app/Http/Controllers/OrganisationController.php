@@ -141,7 +141,7 @@ class OrganisationController extends Controller
     {
         Organisation::destroy($organisation->id);
 
-        return redirect('/organisations/'.$organisation->id)->with('message', 'organisation trashed successfully');;
+        return redirect('/organisations/'.$organisation->id)->with('message', 'organisation trashed successfully');
     }
 
     public function restore(Organisation $organisation) {

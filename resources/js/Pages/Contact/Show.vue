@@ -52,7 +52,7 @@ const removeContactFromTrash = () => {
         <Link class="text-secondary hover:text-main" href="/contacts">Contacts/</Link> {{ contact.name }}
     </h1>
 
-    <TrashedMessage @remove-from-trash="removeContactFromTrash" v-if="isTrashed" message="this organisation was Trashed" />
+    <TrashedMessage @remove-from-trash="removeContactFromTrash" v-if="isTrashed" message="this contact was Trashed" />
 
     <div class="my-8 bg-white rounded-md shadow-lg flex flex-col gap-4 pt-8">
 

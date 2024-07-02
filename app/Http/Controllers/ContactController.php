@@ -144,8 +144,17 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function trash(Contact $contact)
     {
-        //
+        Contact::destroy($contact->id);
+
+        return redirect('/contacts/'.$contact->id)->with('message', 'contact trashed successfully');
+    }
+
+    public function restore(Contact $contact) {
+
+        $contact->restore();
+
+        return redirect('/contacts/'.$contact->id)->with('message', 'contact removed from trash successfully');
     }
 }
