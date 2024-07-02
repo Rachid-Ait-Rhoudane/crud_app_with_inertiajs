@@ -1,12 +1,11 @@
 <script setup>
 
-defineProps({
+let props = defineProps({
     label: {
         type: String,
         required: true
     },
     selectValue: {
-        type: String,
         default: ''
     }
 });

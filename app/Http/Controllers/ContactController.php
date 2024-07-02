@@ -106,7 +106,13 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return Inertia::render('Contact/Edit', [
+            'organisations' => Organisation::all()->map(fn($org) => [
+                                    'id' => $org->id,
+                                    'name' => $org->name
+                                ]),
+            'contact' => $contact->load('organisation')
+        ]);
     }
 
     /**
