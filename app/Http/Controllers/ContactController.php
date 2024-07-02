@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,36 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return '';
+        return Inertia::render('Contact/Index', [
+            'contacts' => Contact::query()
+                                ->when($request->input('filter'), function ($query, $filter) {
+
+                                    if($filter == 'only trashed') {
+
+                                        return $query->onlyTrashed();
+                                    }
+
+                                    return $query->withTrashed();
+                                })
+                                ->when($request->input('search'), function ($query, $search) {
+                                    $query->where('name', 'LIKE', '%' . $search . '%');
+                                })
+                                ->paginate(10)
+                                ->through(function($contact) {
+                                    return [
+                                        'id' => $contact->id,
+                                        'name' => $contact->name,
+                                        'city' => $contact->city,
+                                        'organisation' => $contact->organisation->name,
+                                        'phone' => $contact->phone
+                                    ];
+                                })
+                                ->withQueryString(),
+            'filters' => $request->only(['search', 'filter']),
+            'message' => $request->session()->get('message')
+        ]);
     }
 
     /**

@@ -9,7 +9,7 @@ import CustomTableBody from '../../Shared/CustomTableBody.vue';
 import CustomTableBodyColumn from '../../Shared/CustomTableBodyColumn.vue';
 import CustomTableHeadColumn from '../../Shared/CustomTableHeadColumn.vue';
 
-let props = defineProps({
+defineProps({
     organisations: {
         type: Object,
         required: true

@@ -58,7 +58,7 @@ onMounted(() => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink href="/contacts" :active="false">
+                    <NavLink href="#" :active="false">
                         <i class="fa-solid fa-trash text-white"></i>
                         <span>Trash</span>
                     </NavLink>
