@@ -66,6 +66,10 @@ let props = defineProps({
             </CustomTableBodyColumn>
         </CustomTableBody>
 
+        <CustomTableBody v-if="! organisations.data.length">
+            <CustomTableBodyColumn colspan="6" class="py-3 italic text-gray-500 text-center">No data found</CustomTableBodyColumn>
+        </CustomTableBody>
+
     </CustomTable>
 
     <div class="my-6 flex items-center gap-2">

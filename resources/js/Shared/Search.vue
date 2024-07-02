@@ -1,7 +1,6 @@
 <script setup>
 
 import { router } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
 import { onMounted, ref, watch } from 'vue';
 
 let props = defineProps({
@@ -10,7 +9,7 @@ let props = defineProps({
         required: true
     },
     filters: {
-        type: Array,
+        type: Object,
         required: true
     }
 });

@@ -107,6 +107,10 @@ let removeOrganisationFromTrash = () => {
             <CustomTableBodyColumn>{{ contact.phone }}</CustomTableBodyColumn>
         </CustomTableBody>
 
+        <CustomTableBody v-if="! organisation.contacts.length">
+            <CustomTableBodyColumn colspan="6" class="py-3 italic text-gray-500 text-center">No data found</CustomTableBodyColumn>
+        </CustomTableBody>
+
     </CustomTable>
 
 </template>
