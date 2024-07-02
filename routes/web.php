@@ -40,4 +40,5 @@ Route::middleware('guest')->group(function () {
     Route::post('/contacts', [ContactController::class, 'store']);
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])->withTrashed();
     Route::get('/contacts/edit/{contact}', [ContactController::class, 'edit'])->withTrashed();
+    Route::put('/contacts/{contact}', [ContactController::class, 'update'])->withTrashed();
 });

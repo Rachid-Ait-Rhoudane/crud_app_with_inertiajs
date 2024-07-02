@@ -20,7 +20,7 @@ let props = defineProps({
 
 const formInputs = useForm({
     name: props.contact.name,
-    organisation: props.contact.organisation,
+    organisation: props.contact.organisation.id,
     city: props.contact.city,
     phone: props.contact.phone,
 })
