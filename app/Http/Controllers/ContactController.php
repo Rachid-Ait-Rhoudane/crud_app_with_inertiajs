@@ -89,9 +89,13 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact)
+    public function show(Request $request, Contact $contact)
     {
-        //
+        return Inertia::render('Contact/Show', [
+            'contact' => $contact->load('organisation'),
+            'isTrashed' => $contact->trashed(),
+            'message' => $request->session()->get('message')
+        ]);
     }
 
     /**
