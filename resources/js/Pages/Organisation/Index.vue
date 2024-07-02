@@ -46,7 +46,7 @@ onMounted(() => {
 
 });
 
-let filter = ref(props.filters['filter'] ?? 'filter');
+let filter = ref('filter');
 
 const withTrashed = () => {
 

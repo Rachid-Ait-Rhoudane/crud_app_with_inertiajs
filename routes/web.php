@@ -28,10 +28,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/organisations', [OrganisationController::class, 'index']);
     Route::get('/organisation/create', [OrganisationController::class, 'create']);
     Route::post('/organisations', [OrganisationController::class, 'store']);
-    Route::get('/organisations/{id}', [OrganisationController::class, 'show']);
-    Route::get('/organisations/edit/{id}', [OrganisationController::class, 'edit']);
-    Route::put('/organisations/{id}', [OrganisationController::class, 'update']);
-    Route::delete('/organisations/{id}', [OrganisationController::class, 'destroy']);
+    Route::get('/organisations/{organisation}', [OrganisationController::class, 'show'])->withTrashed();
+    Route::get('/organisations/edit/{organisation}', [OrganisationController::class, 'edit'])->withTrashed();
+    Route::put('/organisations/{organisation}', [OrganisationController::class, 'update'])->withTrashed();
+    Route::delete('/organisations/{organisation}', [OrganisationController::class, 'destroy'])->withTrashed();
 
     //contacts routes
     Route::get('/contacts', [ContactController::class, 'index']);

@@ -85,10 +85,8 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Organisation $organisation)
     {
-        $organisation = Organisation::withTrashed()->where('id', $id)->first();
-
         return Inertia::render('Organisation/Show', [
             'organisation' => $organisation->load('contacts')
         ]);
@@ -100,10 +98,8 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Organisation $organisation)
     {
-        $organisation = Organisation::withTrashed()->where('id', $id)->first();
-
         return Inertia::render('Organisation/Edit', [
             'organisation' => $organisation
         ]);
@@ -116,7 +112,7 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Organisation $organisation)
     {
 
         $attributes = $request->validate([
@@ -127,8 +123,6 @@ class OrganisationController extends Controller
             'email' => ['required', 'email'],
             'country' => ['required']
         ]);
-
-        $organisation = Organisation::withTrashed()->where('id', $id)->first();
 
         $organisation->update($attributes);
 
@@ -141,10 +135,8 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Organisation $organisation)
     {
-        $organisation = Organisation::withTrashed()->where('id', $id)->first();
-
         Organisation::destroy($organisation->id);
 
         return redirect('/organisations');
