@@ -15,7 +15,7 @@ const formInputs = useForm({
 
 <template>
 
-    <div class="w-screen h-screen bg-main grid place-items-center">
+    <div class="w-screen min-h-screen bg-main grid place-items-center">
 
         <div class="bg-white rounded-md space-y-10 w-[90%] sm:w-[450px]">
 
@@ -50,7 +50,7 @@ const formInputs = useForm({
                 </div>
 
                 <div class="bg-gray-200 rounded-b-md py-6 flex flex-row-reverse pr-6">
-                    <button class="px-3 py-2 bg-secondary hover:bg-orange-500 text-white font-bold rounded-md" type="submit">Login</button>
+                    <button class="px-3 py-2 bg-secondary hover:bg-orange-500 text-white font-bold capitalize rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed" type="submit" :disabled="formInputs.processing">login</button>
                 </div>
 
             </form>
