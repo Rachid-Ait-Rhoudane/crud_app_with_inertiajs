@@ -21,7 +21,7 @@ Route::get('/', function () {
     return inertia('Home');
 });
 
-Route::get('/login', [LoginController::class, "create"])->middleware("guest");
+Route::get('/login', [LoginController::class, "create"])->middleware("guest")->name('login');
 
 Route::post('/login', [LoginController::class, "store"])->middleware("guest");
 
