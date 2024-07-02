@@ -37,17 +37,17 @@ const formInputs = useForm({
     <form @submit.prevent="formInputs.put('/contacts/' + contact.id)" class="my-16 p-8 bg-white grid grid-cols-1 lg:grid-cols-2 gap-6 rounded-md shadow-lg">
 
         <div class="space-y-2">
-            <FormInput @update-value="(val) => formInputs.name = val" label="name" placeHolder="Contact name" input-type="text" :input-value="contact.name">{{ formInputs.errors.name }}</FormInput>
+            <FormInput @update-value="(val) => formInputs.name = val" label="name" placeHolder="Contact name" input-type="text" :input-value="contact.name" />
             <FormValidationError v-if="formInputs.errors.name">{{ formInputs.errors.name }}</FormValidationError>
         </div>
 
         <div class="space-y-2">
-            <FormInput @update-value="(val) => formInputs.city = val" label="city" placeHolder="Contact city" input-type="text" :input-value="contact.city">{{ formInputs.errors.city }}</FormInput>
+            <FormInput @update-value="(val) => formInputs.city = val" label="city" placeHolder="Contact city" input-type="text" :input-value="contact.city" />
             <FormValidationError v-if="formInputs.errors.city">{{ formInputs.errors.city }}</FormValidationError>
         </div>
 
         <div class="space-y-2">
-            <FormInput @update-value="(val) => formInputs.phone = val" label="phone" placeHolder="Contact phone" input-type="text" :input-value="contact.phone">{{ formInputs.errors.phone }}</FormInput>
+            <FormInput @update-value="(val) => formInputs.phone = val" label="phone" placeHolder="Contact phone" input-type="text" :input-value="contact.phone" />
             <FormValidationError v-if="formInputs.errors.phone">{{ formInputs.errors.phone }}</FormValidationError>
         </div>
 

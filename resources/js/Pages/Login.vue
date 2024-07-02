@@ -1,8 +1,14 @@
 <script setup>
 
-let submit = () => {
-    console.log('form submited');
-}
+import { Link } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
+import FormInput from '../Shared/FormInput.vue';
+import FormValidationError from '../Shared/FormValidationError.vue';
+
+const formInputs = useForm({
+    email: '',
+    password: ''
+});
 
 </script>
 
@@ -18,21 +24,29 @@ let submit = () => {
                 <hr class="h-0.5 w-1/4 bg-gray-200 rounded-md mx-auto">
             </div>
 
-            <form @submit.prevent="submit" class="flex flex-col gap-6">
+            <form @submit.prevent="formInputs.post('/login')" class="flex flex-col gap-6">
 
                 <div class="flex flex-col gap-1 px-6">
-                    <label class="capitalize text-main font-bold" for="email">email:</label>
-                    <input class="h-10 w-full rounded-md focus:outline-none border border-gray-200 px-2" type="email" name="email" id="email" placeholder="example@gmail.com" />
+                    <FormInput @update-value="(val) => formInputs.email = val" label="email" placeHolder="example@mail.Com" input-type="text" />
+                    <FormValidationError v-if="formInputs.errors.email">{{ formInputs.errors.email }}</FormValidationError>
                 </div>
 
                 <div class="flex flex-col gap-1 px-6">
-                    <label class="capitalize text-main font-bold" for="password">password:</label>
-                    <input class="h-10 w-full rounded-md focus:outline-none border border-gray-200 px-2" type="password" name="password" id="password" placeholder="**********">
+                    <FormInput @update-value="(val) => formInputs.password = val" label="password" placeHolder="*******" input-type="text" />
+                    <FormValidationError v-if="formInputs.errors.password">{{ formInputs.errors.password }}</FormValidationError>
                 </div>
 
                 <div class="px-6 flex items-center gap-1">
                     <input class="h-8 cursor-pointer" type="checkbox" name="remember" id="remember" placeholder="**********">
                     <label class="cursor-pointer" for="remember">Remember me</label>
+                </div>
+
+                <div class="px-6 flex items-center gap-1">
+                    <Link class="text-blue-500 hover:underline" href="/reset-password">Forget password ?</Link>
+                </div>
+
+                <div class="px-6 flex items-center gap-1">
+                    <Link class="text-blue-500 hover:underline" href="/register">Not yet have an account ?</Link>
                 </div>
 
                 <div class="bg-gray-200 rounded-b-md py-6 flex flex-row-reverse pr-6">

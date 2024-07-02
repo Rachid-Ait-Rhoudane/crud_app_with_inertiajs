@@ -33,7 +33,7 @@ const formInputs = useForm({
     <form @submit.prevent="formInputs.post('/contacts')" class="my-16 p-8 bg-white grid grid-cols-1 lg:grid-cols-2 gap-6 rounded-md shadow-lg">
 
         <div class="space-y-2">
-            <FormInput @update-value="(val) => formInputs.name = val" label="name" placeHolder="Contact name" input-type="text">{{ formInputs.errors.name }}</FormInput>
+            <FormInput @update-value="(val) => formInputs.name = val" label="name" placeHolder="Contact name" input-type="text" />
             <FormValidationError v-if="formInputs.errors.name">{{ formInputs.errors.name }}</FormValidationError>
         </div>
 
@@ -47,12 +47,12 @@ const formInputs = useForm({
 
 
         <div class="space-y-2">
-            <FormInput @update-value="(val) => formInputs.city = val" label="city" placeHolder="Contact city" input-type="text">{{ formInputs.errors.city }}</FormInput>
+            <FormInput @update-value="(val) => formInputs.city = val" label="city" placeHolder="Contact city" input-type="text" />
             <FormValidationError v-if="formInputs.errors.city">{{ formInputs.errors.city }}</FormValidationError>
         </div>
 
         <div class="space-y-2">
-            <FormInput @update-value="(val) => formInputs.phone = val" label="phone" placeHolder="Contact phone" input-type="text">{{ formInputs.errors.phone }}</FormInput>
+            <FormInput @update-value="(val) => formInputs.phone = val" label="phone" placeHolder="Contact phone" input-type="text" />
             <FormValidationError v-if="formInputs.errors.phone">{{ formInputs.errors.phone }}</FormValidationError>
         </div>
 
