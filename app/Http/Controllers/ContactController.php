@@ -69,7 +69,18 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'name' => ['required', 'min:3'],
+            'city' => ['required', 'min:3'],
+            'organisation' => ['required'],
+            'phone' => ['required', 'min:10', 'max:10']
+        ]);
+
+        Contact::create([...$attributes,
+            'organisation_id' => $attributes['organisation']
+        ]);
+
+        return redirect('/contacts')->with('message', 'new contact created successfully');
     }
 
     /**
