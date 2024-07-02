@@ -38,27 +38,27 @@ onMounted(() => {
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <ul id="mobile-menu-list" class="absolute z-10 right-10 top-[calc(100%+5px)] bg-third w-80 rounded-md shadow-md py-2 hidden">
+            <ul id="mobile-menu-list" class="absolute z-10 right-10 top-[calc(100%+5px)] bg-main w-80 rounded-md shadow-md py-2 hidden">
                 <li>
-                    <NavLink href="/">
+                    <NavLink href="/" :active="$page.component == 'Home'">
                         <i class="fa-solid fa-gauge text-white"></i>
                         <span>Dashbord</span>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink href="/organisations">
+                    <NavLink href="/organisations" :active="$page.component == 'Organisation/Index'">
                         <i class="fa-solid fa-sitemap text-white"></i>
                         <span>Organisations</span>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink href="/contacts">
+                    <NavLink href="/contacts" :active="$page.component == 'Contact/Index'">
                         <i class="fa-solid fa-address-book text-white"></i>
                         <span>Contacts</span>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink href="/contacts">
+                    <NavLink href="/contacts" :active="false">
                         <i class="fa-solid fa-print text-white"></i>
                         <span>Reports</span>
                     </NavLink>

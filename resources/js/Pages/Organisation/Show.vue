@@ -5,15 +5,23 @@ import { Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
 import ShowInfo from '../../Shared/ShowInfo.vue';
 import CustomTable from '../../Shared/CustomTable.vue';
+import SuccessMessage from '../../Shared/SuccessMessage.vue';
+import TrashedMessage from '../../Shared/TrashedMessage.vue';
 import CustomTableBody from '../../Shared/CustomTableBody.vue';
 import CustomTableBodyColumn from '../../Shared/CustomTableBodyColumn.vue';
 import CustomTableHeadColumn from '../../Shared/CustomTableHeadColumn.vue';
-import TrashedMessage from '../../Shared/TrashedMessage.vue';
 
 let props = defineProps({
     organisation: {
         type: Object,
         required: true
+    },
+    isTrashed: {
+        type: Boolean,
+        required: true
+    },
+    message: {
+        default: null
     }
 });
 
@@ -34,17 +42,23 @@ const showAlert = () => {
 
 };
 
+let removeOrganisationFromTrash = () => {
+    router.post('/organisations/restore/' + props.organisation.id);
+}
+
 </script>
 
 <template>
 
-    <h1 class="text-3xl font-bold mt-16 text-gray-600">
+    <SuccessMessage :message="message" :key="Date.now()" />
+
+    <h1 class="text-3xl font-bold mt-16 my-8 text-gray-600">
         <Link class="text-secondary hover:text-main" href="/organisations">Organisations/</Link> {{ organisation.name }}
     </h1>
 
-    <TrashedMessage message="organisation Trashed Successfully" />
+    <TrashedMessage @remove-from-trash="removeOrganisationFromTrash" v-if="isTrashed" message="this organisation was Trashed" />
 
-    <div class="mb-16 p-8 bg-white rounded-md shadow-lg flex flex-col gap-4">
+    <div class="my-8 bg-white rounded-md shadow-lg flex flex-col gap-4 pt-8">
 
         <ShowInfo info="name">
             {{ organisation.name }}
@@ -70,9 +84,9 @@ const showAlert = () => {
             {{ organisation.country }}
         </ShowInfo>
 
-        <div class="flex items-center justify-between mt-8">
-            <button type="button" @click="showAlert" class="px-3 py-2 bg-red-500 hover:bg-red-600 text-white capitalize rounded-md">delete</button>
-            <Link class="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white capitalize rounded-md" :href="'/organisations/edit/' + organisation.id">edit</Link>
+        <div class="relative mt-8 bg-gray-100 px-8 h-20 rounded-b-md">
+            <button v-if="!isTrashed" type="button" @click="showAlert" class="absolute top-1/2 -translate-y-1/2 left-8 px-3 py-2 bg-red-500 hover:bg-red-600 text-white capitalize rounded-md">delete</button>
+            <Link class="absolute top-1/2 -translate-y-1/2 right-8 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white capitalize rounded-md" :href="'/organisations/edit/' + organisation.id">edit</Link>
         </div>
 
     </div>

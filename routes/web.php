@@ -31,7 +31,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/organisations/{organisation}', [OrganisationController::class, 'show'])->withTrashed();
     Route::get('/organisations/edit/{organisation}', [OrganisationController::class, 'edit'])->withTrashed();
     Route::put('/organisations/{organisation}', [OrganisationController::class, 'update'])->withTrashed();
-    Route::delete('/organisations/{organisation}', [OrganisationController::class, 'destroy'])->withTrashed();
+    Route::delete('/organisations/{organisation}', [OrganisationController::class, 'trash'])->withTrashed();
+    Route::post('/organisations/restore/{organisation}', [OrganisationController::class, 'restore'])->withTrashed();
 
     //contacts routes
     Route::get('/contacts', [ContactController::class, 'index']);

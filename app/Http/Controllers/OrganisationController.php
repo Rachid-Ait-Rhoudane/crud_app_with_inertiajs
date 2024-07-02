@@ -85,10 +85,12 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function show(Organisation $organisation)
+    public function show(Request $request, Organisation $organisation)
     {
         return Inertia::render('Organisation/Show', [
-            'organisation' => $organisation->load('contacts')
+            'organisation' => $organisation->load('contacts'),
+            'isTrashed' => $organisation->trashed(),
+            'message' => $request->session()->get('message')
         ]);
     }
 
@@ -126,7 +128,7 @@ class OrganisationController extends Controller
 
         $organisation->update($attributes);
 
-        return redirect('/organisations/'.$organisation->id);
+        return redirect('/organisations/'.$organisation->id)->with('message', 'organisation updated successfully');
     }
 
     /**
@@ -135,10 +137,17 @@ class OrganisationController extends Controller
      * @param  \App\Models\Organisation  $organisation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Organisation $organisation)
+    public function trash(Organisation $organisation)
     {
         Organisation::destroy($organisation->id);
 
-        return redirect('/organisations');
+        return redirect('/organisations/'.$organisation->id)->with('message', 'organisation trashed successfully');;
+    }
+
+    public function restore(Organisation $organisation) {
+
+        $organisation->restore();
+
+        return redirect('/organisations/'.$organisation->id)->with('message', 'organisation removed from trash successfully');
     }
 }

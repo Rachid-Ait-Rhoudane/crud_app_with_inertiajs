@@ -11,8 +11,8 @@ defineProps({
 
 <template>
 
-    <div class="flex gap-4 capitalize">
-        <span class="font-bold text-main">{{ info }}</span>
+    <div class="flex gap-4 capitalize px-8">
+        <span class="font-bold text-main">{{ info }} :</span>
         <span class="font-bold text-gray-500">
             <slot></slot>
         </span>
