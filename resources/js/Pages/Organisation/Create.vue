@@ -53,7 +53,7 @@ const formInputs = useForm({
         </div>
 
         <div class="space-y-2">
-            <FormSelect @update-value="(val) => formInputs.phone = val" label="country">
+            <FormSelect @update-value="(val) => formInputs.country = val" label="country">
                 <FormSelectOption value="united states">united states</FormSelectOption>
                 <FormSelectOption value="mexico">mexico</FormSelectOption>
                 <FormSelectOption value="spain">spain</FormSelectOption>

@@ -36,4 +36,5 @@ Route::middleware('guest')->group(function () {
 
     //contacts routes
     Route::get('/contacts', [ContactController::class, 'index']);
+    Route::get('/contacts/create', [ContactController::class, 'create']);
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Contact;
+use App\Models\Organisation;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -52,7 +53,12 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Contact/Create', [
+            'organisations' => Organisation::all()->map(fn($org) => [
+                'id' => $org->id,
+                'name' => $org->name
+            ])
+        ]);
     }
 
     /**
