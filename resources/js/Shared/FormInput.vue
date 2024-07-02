@@ -1,7 +1,5 @@
 <script setup>
 
-import FormValidationError from './FormValidationError.vue';
-
 defineProps({
     label: {
         type: String,
