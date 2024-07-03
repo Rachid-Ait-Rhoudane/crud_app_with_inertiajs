@@ -43,6 +43,21 @@ class UserFactory extends Factory
     }
 
     /**
+     * Indicate that the model's avatar is avatars/unknown_user.png.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function setDefaultAvatar()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'avatar' => 'avatars/unknown_user.png',
+            ];
+        });
+    }
+
+
+    /**
      * Indicate that the model's remember token should be null.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory

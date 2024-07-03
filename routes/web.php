@@ -57,7 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/contacts/restore/{contact}', [ContactController::class, 'restore'])->withTrashed();
 
     //users routes
-    Route::get('/users/edit/{user}', [UserController::class, 'create']);
+    Route::get('/users/edit/{user}', [UserController::class, 'edit']);
+    Route::post('/users/{user}', [UserController::class, 'update']);
 
     //logout
     Route::delete('/logout', [LoginController::class, "destroy"]);

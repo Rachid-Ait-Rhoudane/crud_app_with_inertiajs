@@ -21,14 +21,15 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'name' => 'Rachid AIT RHOUDANE',
+            'avatar' => 'avatars/uknown_user.png',
             'city' => 'Tetouan',
             'address' => 'Bni Hdifa Kouilma',
             'email' => 'rachid@gmail.com',
             'password' => Hash::make('rachid123456789'),
-            'role' => 'Owner'
+            'role' => 'owner'
         ]);
 
-        User::factory(10)->unverified()->dontRemember()->state(new Sequence(
+        User::factory(10)->setDefaultAvatar()->unverified()->dontRemember()->state(new Sequence(
             fn ($sequence) => ['role' => collect(['owner', 'user'])->random()],
         ))->create();
 

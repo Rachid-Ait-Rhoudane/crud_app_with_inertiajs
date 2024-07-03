@@ -8,7 +8,7 @@ import FormSelectOption from '../Shared/FormSelectOption.vue';
 import FormValidationError from '../Shared/FormValidationError.vue';
 import FormInputFile from '../Shared/FormInputFile.vue';
 
-defineProps({
+let props = defineProps({
     user: {
         type: Object,
         required: true
@@ -16,10 +16,10 @@ defineProps({
 });
 
 const formInputs = useForm({
-    name: '',
-    city: '',
-    address: '',
-    email: '',
+    name: props.user.name,
+    city: props.user.city,
+    address: props.user.address,
+    email: props.user.email,
     avatar: null,
     password: '',
     password_confirmation: ''
@@ -57,7 +57,7 @@ const formInputs = useForm({
         </div>
 
         <div class="flex flex-col gap-1 px-6">
-            <FormSelect @update-value="(val) => formInputs.organisation = val" label="role" :select-value="user.role">
+            <FormSelect @update-value="(val) => formInputs.role = val" label="role" :select-value="user.role">
                 <FormSelectOption value="owner">Owner</FormSelectOption>
                 <FormSelectOption value="user">User</FormSelectOption>
             </FormSelect>
