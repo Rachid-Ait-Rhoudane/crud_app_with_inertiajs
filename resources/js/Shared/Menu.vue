@@ -37,7 +37,7 @@ onMounted(() => {
 
     <ul id="menu-list" class="hidden py-2 absolute w-full top-[calc(100%+15px)] z-50 bg-white border border-gray-200 rounded-md shadow-md">
         <li>
-            <Link href="/profile" class="flex items-center gap-2 p-2 hover:bg-secondary hover:text-white capitalize">
+            <Link :href="'/users/edit/'+$page.props.auth.user.id" class="flex items-center gap-2 p-2 hover:bg-secondary hover:text-white capitalize">
                 <i class="fa-solid fa-user"></i>
                 <span>my profile</span>
             </Link>

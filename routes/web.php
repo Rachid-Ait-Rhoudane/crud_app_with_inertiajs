@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\OrganisationController;
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/contacts/{contact}', [ContactController::class, 'update'])->withTrashed();
     Route::delete('/contacts/{contact}', [ContactController::class, 'trash']);
     Route::post('/contacts/restore/{contact}', [ContactController::class, 'restore'])->withTrashed();
+
+    //users routes
+    Route::get('/users/edit/{user}', [UserController::class, 'create']);
 
     //logout
     Route::delete('/logout', [LoginController::class, "destroy"]);

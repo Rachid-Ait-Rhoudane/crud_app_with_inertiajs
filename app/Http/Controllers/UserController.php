@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -21,9 +22,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return Inertia::render('Profile', [
+            'user' => $request->user()->only(['id', 'name', 'city', 'address', 'email', 'role'])
+        ]);
     }
 
     /**
