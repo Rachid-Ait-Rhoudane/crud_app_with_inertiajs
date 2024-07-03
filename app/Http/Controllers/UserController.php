@@ -78,15 +78,31 @@ class UserController extends Controller
             'city' => ['min:5'],
             'address' => ['min:5'],
             'email' => ['email'],
+            'role' => ['required']
         ]);
 
         if($request->hasFile('avatar')) {
+
             $files = $request->validate([
                 'avatar' => ['mimes:jpg,png']
             ]);
 
-            $avatar = Storage::disk('public')->put('avatars', $files['avatar']);
+            $attributes['avatar'] = Storage::disk('public')->put('avatars', $files['avatar']);
         }
+
+        if($request->filled('password')) {
+
+            $inputs = $request->validate([
+                'password' => ['min:7', 'confirmed']
+            ]);
+
+            $attributes['password'] = $inputs['password'];
+        }
+
+        $user->update($attributes);
+
+        return redirect('/');
+
     }
 
     /**

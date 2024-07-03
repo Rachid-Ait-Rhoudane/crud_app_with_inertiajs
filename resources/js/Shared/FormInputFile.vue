@@ -9,11 +9,12 @@ defineProps({
     }
 });
 
+let emits = defineEmits(['updateValue']);
+
 let fileName = ref('no file chosen');
 
 let file = ref(null);
 
-let emits = defineEmits(['updateValue']);
 
 const updateValue = (e) => {
 
@@ -29,7 +30,7 @@ watch(file, (val) => {
 
     fileName.value = val ? val.name : 'no file chosen';
 
-    emits('updateValue', file.value);
+    emits('updateValue', val);
 
 });
 

@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
 
     //users routes
     Route::get('/users/edit/{user}', [UserController::class, 'edit']);
-    Route::post('/users/{user}', [UserController::class, 'update']);
+    Route::put('/users/{user}', [UserController::class, 'update']);
 
     //logout
     Route::delete('/logout', [LoginController::class, "destroy"]);

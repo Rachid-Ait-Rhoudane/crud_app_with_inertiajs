@@ -20,9 +20,11 @@ const formInputs = useForm({
     city: props.user.city,
     address: props.user.address,
     email: props.user.email,
+    role: props.user.role,
     avatar: null,
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    _method: 'put'
 });
 
 </script>
@@ -61,14 +63,12 @@ const formInputs = useForm({
                 <FormSelectOption value="owner">Owner</FormSelectOption>
                 <FormSelectOption value="user">User</FormSelectOption>
             </FormSelect>
+            <FormValidationError v-if="formInputs.errors.role">{{ formInputs.errors.role }}</FormValidationError>
         </div>
 
         <div class="flex flex-col gap-1 px-6">
-            <FormInputFile @update-value="(val) => formInputs.avatar = val" label="avatar" />
-            <FormValidationError v-if="formInputs.errors.email">{{ formInputs.errors.email }}</FormValidationError>
-            <progress v-if="formInputs.progress" :value="formInputs.progress.percentage" max="100">
-                {{ formInputs.progress.percentage }}%
-            </progress>
+            <FormInputFile @update-value="(val) => { formInputs.avatar = val }" label="avatar" />
+            <FormValidationError v-if="formInputs.errors.avatar">{{ formInputs.errors.avatar }}</FormValidationError>
         </div>
 
         <div class="flex flex-col gap-1 px-6">
