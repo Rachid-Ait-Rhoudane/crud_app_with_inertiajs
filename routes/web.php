@@ -17,13 +17,17 @@ use App\Http\Controllers\auth\RegisterController;
 |
 */
 
-Route::get('/login', [LoginController::class, "create"])->middleware("guest")->name('login');
+Route::middleware('guest')->group(function() {
 
-Route::post('/login', [LoginController::class, "store"])->middleware("guest");
+    //login
+    Route::get('/login', [LoginController::class, "create"])->name('login');
+    Route::post('/login', [LoginController::class, "store"]);
 
-Route::get('/register', [RegisterController::class, "create"])->middleware("guest");
+    //register
+    Route::get('/register', [RegisterController::class, "create"]);
+    Route::post('/register', [RegisterController::class, "store"]);
 
-Route::post('/register', [RegisterController::class, "store"])->middleware("guest");
+});
 
 Route::middleware('auth')->group(function () {
 
