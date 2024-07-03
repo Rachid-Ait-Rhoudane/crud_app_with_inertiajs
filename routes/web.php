@@ -17,10 +17,6 @@ use App\Http\Controllers\auth\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return inertia('Home');
-});
-
 Route::get('/login', [LoginController::class, "create"])->middleware("guest")->name('login');
 
 Route::post('/login', [LoginController::class, "store"])->middleware("guest");
@@ -30,6 +26,10 @@ Route::get('/register', [RegisterController::class, "create"])->middleware("gues
 Route::post('/register', [RegisterController::class, "store"])->middleware("guest");
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/', function () {
+        return inertia('Home');
+    });
 
     //organisations routes
     Route::get('/organisations', [OrganisationController::class, 'index']);

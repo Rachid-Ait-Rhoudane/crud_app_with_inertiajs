@@ -31,7 +31,7 @@ onMounted(() => {
 <template>
 
     <button id="menu-btn" class="flex items-center gap-2 hover:text-secondary">
-        <span class="text-sm sm:text-base">{{ $page.props.auth.user.name }}</span>
+        <span class="text-sm sm:text-base min-w-32">{{ $page.props.auth.user.name }}</span>
         <i class="fa-solid fa-chevron-down duration-300"></i>
     </button>
 
