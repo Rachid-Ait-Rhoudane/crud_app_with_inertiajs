@@ -1,6 +1,6 @@
 <script setup>
 
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 defineProps({
     label: {
@@ -18,19 +18,20 @@ let emits = defineEmits(['updateValue']);
 const updateValue = (e) => {
 
     file.value = e.target.files[0];
-
-    if(file) {
-        fileName.value = file.name;
-
-        emits('updateValue', file.value);
-    }
 }
 
 const resetValue = () => {
+
     file.value = null;
-    fileName.value = 'no file chosen';
-    emits('updateValue', file.value);
 }
+
+watch(file, (val) => {
+
+    fileName.value = val ? val.name : 'no file chosen';
+
+    emits('updateValue', file.value);
+
+});
 
 </script>
 
