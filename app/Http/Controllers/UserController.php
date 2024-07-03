@@ -88,6 +88,11 @@ class UserController extends Controller
             ]);
 
             $attributes['avatar'] = Storage::disk('public')->put('avatars', $files['avatar']);
+
+            if($user->avatar !== 'avatars/unknown_user.png') {
+
+                Storage::disk('public')->delete($user->avatar);
+            }
         }
 
         if($request->filled('password')) {

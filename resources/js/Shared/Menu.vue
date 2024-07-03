@@ -1,7 +1,7 @@
 <script setup>
 
 import { onMounted } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import MenuLink from './MenuLink.vue';
 
 onMounted(() => {
 
@@ -31,28 +31,29 @@ onMounted(() => {
 <template>
 
     <button id="menu-btn" class="flex items-center gap-2 hover:text-secondary">
+        <img class="block w-8 aspect-square rounded-full" :src="'http://127.0.0.1:8000'+$page.props.auth.user.avatar" alt="user avatar">
         <span class="text-sm sm:text-base min-w-32">{{ $page.props.auth.user.name }}</span>
         <i class="fa-solid fa-chevron-down duration-300"></i>
     </button>
 
     <ul id="menu-list" class="hidden py-2 absolute w-full top-[calc(100%+15px)] z-50 bg-white border border-gray-200 rounded-md shadow-md">
         <li>
-            <Link :href="'/users/edit/'+$page.props.auth.user.id" class="flex items-center gap-2 p-2 hover:bg-secondary hover:text-white capitalize">
+            <MenuLink :href="'/users/edit/'+$page.props.auth.user.id" :active="$page.component == 'Profile'">
                 <i class="fa-solid fa-user"></i>
                 <span>my profile</span>
-            </Link>
+            </MenuLink>
         </li>
         <li>
-            <Link href="/users" class="flex items-center gap-2 p-2 hover:bg-secondary hover:text-white capitalize">
+            <MenuLink href="/users">
                 <i class="fa-solid fa-gear"></i>
                 <span>manage users</span>
-            </Link>
+            </MenuLink>
         </li>
         <li>
-            <Link href="/logout" method="delete" as="button" class="flex items-center gap-2 p-2 w-full hover:bg-secondary hover:text-white capitalize">
+            <MenuLink href="/logout" method="delete" as="button" class="w-full">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>logout</span>
-            </Link>
+            </MenuLink>
         </li>
     </ul>
 

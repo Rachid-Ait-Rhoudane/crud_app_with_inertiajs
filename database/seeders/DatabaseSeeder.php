@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'name' => 'Rachid AIT RHOUDANE',
-            'avatar' => 'avatars/uknown_user.png',
+            'avatar' => 'avatars/unknown_user.png',
             'city' => 'Tetouan',
             'address' => 'Bni Hdifa Kouilma',
             'email' => 'rachid@gmail.com',

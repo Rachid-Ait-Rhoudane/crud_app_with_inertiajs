@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,7 +38,9 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $request->user()?->only('id', 'name', 'city', 'address', 'email')
+                'user' => $request->user() ? [...$request->user()->only('id', 'name', 'city', 'address', 'email'),
+                    'avatar' => Storage::url($request->user()->avatar)
+                ] : null
             ]
         ]);
     }
