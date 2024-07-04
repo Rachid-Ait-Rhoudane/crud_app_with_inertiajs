@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TrashController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\OrganisationController;
@@ -59,6 +60,9 @@ Route::middleware('auth')->group(function () {
     //users routes
     Route::get('/users/edit/{user}', [UserController::class, 'edit']);
     Route::put('/users/{user}', [UserController::class, 'update']);
+
+    //trash routes
+    Route::get('/trash', [TrashController::class, 'index']);
 
     //logout
     Route::delete('/logout', [LoginController::class, "destroy"]);

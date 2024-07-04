@@ -58,7 +58,7 @@ onMounted(() => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink href="#" :active="false">
+                    <NavLink href="/trash" :active="$page.component == 'Trash'">
                         <i class="fa-solid fa-trash text-white"></i>
                         <span>Trash</span>
                     </NavLink>
