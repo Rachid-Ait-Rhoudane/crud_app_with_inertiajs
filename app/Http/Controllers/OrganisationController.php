@@ -148,6 +148,6 @@ class OrganisationController extends Controller
 
         $organisation->restore();
 
-        return redirect('/organisations/'.$organisation->id)->with('message', 'organisation removed from trash successfully');
+        return back()->with('message', 'organisation removed from trash successfully');
     }
 }

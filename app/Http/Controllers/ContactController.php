@@ -36,7 +36,10 @@ class ContactController extends Controller
                                         'id' => $contact->id,
                                         'name' => $contact->name,
                                         'city' => $contact->city,
-                                        'organisation' => $contact->organisation->name,
+                                        'organisation' => $contact->organisation()
+                                                                ->withTrashed()
+                                                                ->first()
+                                                                ->name,
                                         'phone' => $contact->phone
                                     ];
                                 })
@@ -155,6 +158,6 @@ class ContactController extends Controller
 
         $contact->restore();
 
-        return redirect('/contacts/'.$contact->id)->with('message', 'contact removed from trash successfully');
+        return back()->with('message', 'contact removed from trash successfully');
     }
 }

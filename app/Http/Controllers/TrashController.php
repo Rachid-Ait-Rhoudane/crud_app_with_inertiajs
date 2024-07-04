@@ -14,11 +14,30 @@ class TrashController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('Trash', [
-            'organisations' => Organisation::paginate(10),
-            'contacts' => Contact::paginate(10)
+            'organisations' => Organisation::query()
+                            ->onlyTrashed()
+                            ->paginate(
+                                $perPage = 10, $columns = ['*'], $pageName = 'organisations'
+                            )->through(function($org) {
+                                return [
+                                    'id' => $org->id,
+                                    'name' => $org->name
+                                ];
+                            })->withQueryString(),
+            'contacts' => Contact::query()
+                            ->onlyTrashed()
+                            ->paginate(
+                                $perPage = 10, $columns = ['*'], $pageName = 'contacts'
+                            )->through(function($contact) {
+                                return [
+                                    'id' => $contact->id,
+                                    'name' => $contact->name
+                                ];
+                            })->withQueryString(),
+            'message' => $request->session()->get('message')
         ]);
     }
 
