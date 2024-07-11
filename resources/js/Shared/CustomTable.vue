@@ -6,7 +6,7 @@
 
     <div class="overflow-x-auto mt-6">
 
-        <table class="min-w-[800px] w-full bg-white shadow-md">
+        <table class="min-w-[800px] w-full bg-white">
 
             <thead class="border-b border-b-gray-200 text-base md:text-2xl capitalize text-white bg-main">
                 <tr>
