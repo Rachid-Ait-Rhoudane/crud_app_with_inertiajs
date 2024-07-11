@@ -170,4 +170,11 @@ class ContactController extends Controller
 
         return back()->with('message', 'contact removed from trash successfully');
     }
+
+    public function deleteDefinitely(Contact $contact) {
+
+        $contact->forceDelete();
+
+        return back()->with('message', 'contact definitely deleted successfully');
+    }
 }

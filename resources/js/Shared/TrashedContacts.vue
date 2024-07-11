@@ -42,7 +42,7 @@ const deleteDefinitely = (id) => {
         })
         .then((willDelete) => {
             if (willDelete) {
-
+                router.delete('/contacts/delete/definitely/'+id);
             }
     });
 }

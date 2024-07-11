@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/contacts/{contact}', [ContactController::class, 'update'])->withTrashed();
     Route::delete('/contacts/{contact}', [ContactController::class, 'trash']);
     Route::post('/contacts/restore/{contact}', [ContactController::class, 'restore'])->withTrashed();
+    Route::delete('/contacts/delete/definitely/{contact}', [ContactController::class, 'deleteDefinitely'])->withTrashed();
 
     //users routes
     Route::get('/users/edit/{user}', [UserController::class, 'edit']);
