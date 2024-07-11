@@ -24,7 +24,10 @@ defineProps({
 
     <SuccessMessage :message="message" :key="Date.now()" />
 
-    <h1 class="mt-16 text-xl md:text-3xl font-bold">Trash</h1>
+    <h1 class="mt-16 text-xl md:text-3xl font-bold flex items-center gap-2">
+        <i class="fa-solid fa-trash-can-arrow-up"></i>
+        Trash
+    </h1>
 
     <TrashedOrganisations :organisations="organisations" />
 

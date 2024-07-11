@@ -28,7 +28,7 @@ defineProps({
 
     <SuccessMessage :message="message" />
 
-    <h1 class="mt-8 text-xl md:text-3xl font-bold">Organisations</h1>
+    <h1 class="mt-16 text-xl md:text-3xl font-bold">Organisations</h1>
 
     <div class="my-8 flex items-center justify-between">
 
