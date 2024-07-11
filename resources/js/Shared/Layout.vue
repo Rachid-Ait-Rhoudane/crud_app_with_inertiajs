@@ -13,11 +13,11 @@ import Menu from './Menu.vue';
 
         <Navbar />
 
-        <section class="flex-1 grid grid-rows-12">
+        <section class="flex-1 flex flex-col">
 
             <MobileNavbar />
 
-            <div class="flex items-center justify-between row-span-1 px-4">
+            <div class="flex items-center justify-between h-20 px-4">
                 <h3 class="font-bold text-third italic capitalize">
                 Inertiajs
                 </h3>
@@ -26,7 +26,7 @@ import Menu from './Menu.vue';
                 </div>
             </div>
 
-            <div class="row-span-10 md:row-span-11 bg-gray-100 px-4 md:px-8 overflow-hidden">
+            <div class="bg-gray-100 px-4 md:px-8 flex-1 overflow-hidden">
                 <slot />
             </div>
 

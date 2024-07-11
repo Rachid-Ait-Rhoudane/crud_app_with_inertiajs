@@ -18,15 +18,23 @@ class ContactController extends Controller
     {
         return Inertia::render('Contact/Index', [
             'contacts' => Contact::query()
-                                ->when($request->input('filter'), function ($query, $filter) {
+                                ->when($request->input('filter'),
 
-                                    if($filter == 'only trashed') {
+                                        function ($query, $filter) {
 
-                                        return $query->onlyTrashed();
-                                    }
+                                            if($filter == 'only trashed') {
 
-                                    return $query->withTrashed();
-                                })
+                                                return $query->onlyTrashed();
+                                            }
+
+                                            $query->withTrashed();
+                                        },
+
+                                        function ($query) {
+                                            $query->withTrashed();
+                                        }
+
+                                )
                                 ->when($request->input('search'), function ($query, $search) {
                                     $query->where('name', 'LIKE', '%' . $search . '%');
                                 })
@@ -95,7 +103,9 @@ class ContactController extends Controller
     public function show(Request $request, Contact $contact)
     {
         return Inertia::render('Contact/Show', [
-            'contact' => $contact->load('organisation'),
+            'contact' => $contact->load(['organisation' => function($query) {
+                            $query->withTrashed();
+                        }]),
             'isTrashed' => $contact->trashed(),
             'message' => $request->session()->get('message')
         ]);

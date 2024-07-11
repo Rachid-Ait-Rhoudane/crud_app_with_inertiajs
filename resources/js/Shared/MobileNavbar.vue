@@ -26,7 +26,7 @@ onMounted(() => {
 
 <template>
 
-    <nav class="bg-third px-4 grid-rows-1 relative flex justify-between items-center md:hidden">
+    <nav class="bg-third px-4 h-20 relative flex justify-between items-center md:hidden">
 
         <h1 class="grid place-items-center uppercase text-3xl font-black italic text-white w-fit h-full">
             crud

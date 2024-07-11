@@ -7,13 +7,13 @@ import NavLink from './NavLink.vue';
 
 <template>
 
-    <nav class="bg-main hidden md:grid md:grid-rows-12 md:min-w-[250px]">
+    <nav class="bg-main hidden md:block md:min-w-[250px]">
 
-        <h1 class="row-span-1 flex justify-center items-center uppercase text-3xl font-black italic text-white bg-third">
+        <h1 class="h-20 flex justify-center items-center uppercase text-3xl font-black italic text-white bg-third">
             crud
         </h1>
 
-        <ul class="w-full row-span-11 mt-10">
+        <ul class="w-full mt-10">
             <li>
                 <NavLink href="/" :active="$page.component == 'Home'">
                     <i class="fa-solid fa-gauge text-white"></i>
