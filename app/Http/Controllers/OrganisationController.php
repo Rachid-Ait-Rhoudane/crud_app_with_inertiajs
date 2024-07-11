@@ -158,4 +158,11 @@ class OrganisationController extends Controller
 
         return back()->with('message', 'organisation removed from trash successfully');
     }
+
+    public function deleteDefinitely(Organisation $organisation) {
+
+        $organisation->forceDelete();
+
+        return back()->with('message', 'organisation definitely deleted successfully');
+    }
 }

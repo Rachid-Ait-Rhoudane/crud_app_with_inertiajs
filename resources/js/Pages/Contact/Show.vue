@@ -25,7 +25,7 @@ const showAlert = () => {
 
     swal({
         title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this contact!",
+        text: "This contact will be moved to the trash!",
         icon: "warning",
         buttons: true,
         dangerMode: true,

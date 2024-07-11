@@ -17,7 +17,34 @@ defineProps({
 
 const restore = (id) => {
 
-    router.post('/organisations/restore/'+id);
+    swal({
+        title: "Are you sure?",
+        text: "This organisation will be removed from the trash!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                router.post('/organisations/restore/'+id);
+            }
+    });
+}
+
+const deleteDefinitely = (id) => {
+
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you won't be able to recover this organisation !",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                router.delete('/organisations/delete/definitely/'+id);
+            }
+    });
 }
 
 </script>
@@ -50,7 +77,7 @@ const restore = (id) => {
                 </button>
             </CustomTableBodyColumn>
             <CustomTableBodyColumn>
-                <button type="button" class="flex items-center gap-1 text-blue-500 hover:text-blue-600" :href="'/organisations/' + organisation.id">
+                <button @click="deleteDefinitely(organisation.id)" type="button" class="flex items-center gap-1 text-blue-500 hover:text-blue-600" :href="'/organisations/' + organisation.id">
                     <i class="fa-solid fa-trash"></i>
                     <span>Delete</span>
                 </button>

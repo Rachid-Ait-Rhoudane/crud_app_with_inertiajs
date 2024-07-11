@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/organisations/{organisation}', [OrganisationController::class, 'update'])->withTrashed();
     Route::delete('/organisations/{organisation}', [OrganisationController::class, 'trash']);
     Route::post('/organisations/restore/{organisation}', [OrganisationController::class, 'restore'])->withTrashed();
+    Route::delete('/organisations/delete/definitely/{organisation}', [OrganisationController::class, 'deleteDefinitely'])->withTrashed();
 
     //contacts routes
     Route::get('/contacts', [ContactController::class, 'index']);
@@ -62,7 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update']);
 
     //trash routes
-    Route::get('/trash', [TrashController::class, 'index']);
+    Route::get('/trash', TrashController::class);
 
     //logout
     Route::delete('/logout', [LoginController::class, "destroy"]);

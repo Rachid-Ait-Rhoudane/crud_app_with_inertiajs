@@ -14,7 +14,7 @@ class TrashController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function __invoke(Request $request)
     {
         return Inertia::render('Trash', [
             'organisations' => Organisation::query()
@@ -39,27 +39,5 @@ class TrashController extends Controller
                             })->withQueryString(),
             'message' => $request->session()->get('message')
         ]);
-    }
-
-    /**
-     * Restore the specified resource from trash.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
